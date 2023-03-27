@@ -1,10 +1,12 @@
 package com.example.bookapp.model;
 
+import com.example.bookapp.entity.Book;
+import lombok.Data;
 import lombok.Value;
 
 
-@Value
-public class BookResponse {
+@Data
+public class BookResponse  {
     Long id;
     String author;
     String title;

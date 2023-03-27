@@ -11,7 +11,10 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-public class Book {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Book  {
 
 
 @Id
@@ -20,7 +23,7 @@ public class Book {
 
     private String author;
     private String title;
-    private String price;
+    private Double price;
 
     @OneToMany(mappedBy = "book", orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<BookEntity> bookEntity = new HashSet<>();
