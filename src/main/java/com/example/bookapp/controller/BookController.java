@@ -26,6 +26,10 @@ public class BookController {
 
     private final BookConverter converter;
 
+    @GetMapping
+    public String showBookForm () {
+        return "books";
+    }
     @GetMapping("/{id}")
     public Book getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);

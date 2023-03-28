@@ -10,41 +10,27 @@
 <h1>Book Store</h1>
 
 <body>
-<form action="page/booklist.html" target="_blank">
-    <button>Go to the list of  books</button>
+
+<form method="post" th:object="${book}">
+    <div>
+        <h3>Name the Author</h3>
+        <input type="text" th:field="*{author}"/>
+        <br/>
+        <h3>Give the title</h3>
+        <input type="text" th:field="*{title}"/>
+        <br/>
+        <h3>Set price</h3>
+        <input type="text" th:field="*{price}"/>
+        <br/>
+        <button>Submit</button>
+
+
+    </div>
 </form>
 </body>
 </body>
 
-<form th:action="@{/orders/{id}/order_lines(id=${single_order.id})}" method="post" th:object="${order_line}">
-    <!--     select с выбором-->
-    <select class="form-control" id="dropDownList" th:field="*{product.id}">
-        <option value="0">select option</option>
-        <option th:each="option : ${product_list}" th:value="${option.id}" th:text="${option.productName}"></option>
-    </select>
 
-
-    <input th:type="text" th:field="*{count}"/>
-    <!--    <input type="hidden" th:field="*{order}" th:value="${single_order}"/>-->
-
-    <input type="submit" value="add order line">
-
-</form>
-
-<body>
-<h1>Orders:</h1>
-
-<div th:each="order:${orders_list}">
-    <span th:text="${order.id}">
-        </span>
-    <span th:text="${order.getOrderLines()}"></span>
-    <a th:href="@{/orders/{id}(id=${order.id})}">Edit order</a>
-    <a th:href="@{/orders/delete/{id}(id=${order.id})}">Delete order</a>
-</div>
-<form th:action="@{/orders}" th:method="post">
-    <input type="submit" value="Create order">
-</form>
-</body>
 
 
 </html>
