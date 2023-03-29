@@ -2,6 +2,7 @@ package com.example.bookapp.service;
 
 
 import com.example.bookapp.convert.BookConverter;
+import com.example.bookapp.convert.BookRequestToBookConverter;
 import com.example.bookapp.entity.Book;
 import com.example.bookapp.entity.BookEntity;
 import com.example.bookapp.exception.BookNotFoundException;
@@ -11,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -22,6 +22,8 @@ import java.util.stream.StreamSupport;
 public class BookService {
     private final BookRepository bookRepository;
     private final BookConverter converter;
+
+
 
 
 
@@ -38,7 +40,7 @@ public class BookService {
     public List<Book> getAllBooks() {
         Iterable<BookEntity> iterable = bookRepository.findAll();
         return StreamSupport.stream(iterable.spliterator(), false)
-                .map(converter::bookEntityToBook)
+                .map(converter::convert)
                 .collect(Collectors.toList());
     }
 
@@ -46,14 +48,14 @@ public class BookService {
     public List<Book> findByAuthor(String author) {
         Iterable<BookEntity> iterable = bookRepository.findAllByAuthorContaining(author);
         return StreamSupport.stream(iterable.spliterator(), false)
-                .map(converter::bookEntityToBook)
+                .map(converter::convert)
                 .collect(Collectors.toList());
     }
 
 
     public void addBook(Book book) {
-        Book book = converter.convert(book);
-        bookRepository.save(book);
+        BookEntity bookEntity = converter.convert(book);
+        bookRepository.save(bookEntity);
     }
 
 
@@ -61,7 +63,7 @@ public class BookService {
         if (!bookRepository.existsById(book.getId()))
             throw new BookNotFoundException("Book not found: id = " + book.getId());
 
-        BookEntity bookEntity = converter.bookToBookEntity(book);
+        BookEntity bookEntity = converter.convert(book);
         bookRepository.save(bookEntity);
 
     }

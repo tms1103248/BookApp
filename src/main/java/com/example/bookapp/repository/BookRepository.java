@@ -2,6 +2,7 @@ package com.example.bookapp.repository;
 
 import com.example.bookapp.entity.Book;
 import com.example.bookapp.entity.BookEntity;
+import com.example.bookapp.model.BookRequest;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.data.repository.CrudRepository;
@@ -13,6 +14,7 @@ public interface BookRepository extends CrudRepository<BookEntity, Long> {
 
 
     List<BookEntity> findAllByAuthorContaining(String author);
+
 
 
 
