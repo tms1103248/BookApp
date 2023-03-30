@@ -10,11 +10,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "bookList")
+@Table(name = "author")
 public class Author {
 
 
@@ -24,7 +24,7 @@ public class Author {
 
     private String name;
     private String surname;
-     List <Book> bookList;
+
 
     @OneToMany(mappedBy = "book", orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Book> book = new HashSet<>();
