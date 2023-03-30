@@ -2,9 +2,8 @@ package com.example.bookapp.service;
 
 
 import com.example.bookapp.convert.BookConverter;
-import com.example.bookapp.convert.BookRequestToBookConverter;
+import com.example.bookapp.entity.Author;
 import com.example.bookapp.entity.Book;
-import com.example.bookapp.entity.BookEntity;
 import com.example.bookapp.exception.BookNotFoundException;
 import com.example.bookapp.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,42 +27,42 @@ public class BookService {
 
 
 
-    public Book getBookById(Long id) {
-        BookEntity bookEntity = bookRepository
+    public Author getBookById(Long id) {
+        Book book = bookRepository
                 .findById(id)
                 .orElseThrow(() -> new BookNotFoundException("Book not found: id = " + id));
 
-        return converter.convert(bookEntity);
+        return converter.convert(book);
     }
 
 
-    public List<Book> getAllBooks() {
-        Iterable<BookEntity> iterable = bookRepository.findAll();
+    public List<Author> getAllBooks() {
+        Iterable<Book> iterable = bookRepository.findAll();
         return StreamSupport.stream(iterable.spliterator(), false)
                 .map(converter::convert)
                 .collect(Collectors.toList());
     }
 
 
-    public List<Book> findByAuthor(String author) {
-        Iterable<BookEntity> iterable = bookRepository.findAllByAuthorContaining(author);
+    public List<Author> findByAuthor(String author) {
+        Iterable<Book> iterable = bookRepository.findAllByAuthorContaining(author);
         return StreamSupport.stream(iterable.spliterator(), false)
                 .map(converter::convert)
                 .collect(Collectors.toList());
     }
 
 
-    public void addBook(Book book) {
-        BookEntity bookEntity = converter.convert(book);
+    public void addBook(Author author) {
+        Book bookEntity = converter.convert(author);
         bookRepository.save(bookEntity);
     }
 
 
-    public void editBook(Book book) {
-        if (!bookRepository.existsById(book.getId()))
-            throw new BookNotFoundException("Book not found: id = " + book.getId());
+    public void editBook(Author author) {
+        if (!bookRepository.existsById(author.getId()))
+            throw new BookNotFoundException("Book not found: id = " + author.getId());
 
-        BookEntity bookEntity = converter.convert(book);
+        Book bookEntity = converter.convert(author);
         bookRepository.save(bookEntity);
 
     }

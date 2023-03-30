@@ -1,33 +1,28 @@
 package com.example.bookapp.entity;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Book  {
+@Entity
+@Table(name = "books")
 
-
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private String author;
+    @Column(name = "title")
     private String title;
+    @Column(name = "price")
     private Double price;
 
-    @OneToMany(mappedBy = "book", orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<BookEntity> bookEntity = new HashSet<>();
-
-
-
+    @ManyToOne
+    @JoinColumn(name = "author")
+    private Author book;
 }

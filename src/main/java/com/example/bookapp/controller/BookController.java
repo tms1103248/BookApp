@@ -3,7 +3,7 @@ package com.example.bookapp.controller;
 
 import com.example.bookapp.convert.BookConverter;
 import com.example.bookapp.convert.BookRequestToBookConverter;
-import com.example.bookapp.entity.Book;
+import com.example.bookapp.entity.Author;
 import com.example.bookapp.model.BookRequest;
 import com.example.bookapp.service.BookService;
 
@@ -31,12 +31,12 @@ private final BookRequestToBookConverter converter2;
 //    }
 
     @GetMapping("/{id}")
-    public Book getBookById(@PathVariable Long id) {
+    public Author getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
     }
 
     @GetMapping
-    public List<Book> getAllBooks(@RequestParam(required = false) String author) {
+    public List<Author> getAllBooks(@RequestParam(required = false) String author) {
         if (author != null)
             return bookService.findByAuthor(author);
 
