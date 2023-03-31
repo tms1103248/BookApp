@@ -26,7 +26,7 @@ public class Author {
     private String surname;
 
 
-    @OneToMany(mappedBy = "book", orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "author", orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Book> book = new HashSet<>();
 
 

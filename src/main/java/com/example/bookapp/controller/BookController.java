@@ -4,6 +4,7 @@ package com.example.bookapp.controller;
 import com.example.bookapp.convert.BookConverter;
 import com.example.bookapp.entity.Author;
 import com.example.bookapp.model.BookRequest;
+import com.example.bookapp.model.BookResponse;
 import com.example.bookapp.service.BookService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class BookController {
 
     private final BookService bookService;
 
-private final BookRequestToBookConverter converter2;
+
     private final BookConverter converter;
 
 
@@ -30,12 +31,12 @@ private final BookRequestToBookConverter converter2;
 //    }
 
     @GetMapping("/{id}")
-    public Author getBookById(@PathVariable Long id) {
+    public BookResponse getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
     }
 
     @GetMapping
-    public List<Author> getAllBooks(@RequestParam(required = false) String author) {
+    public List<BookResponse> getAllBooks(@RequestParam(required = false) String author) {
         if (author != null)
             return bookService.findByAuthor(author);
 
@@ -44,16 +45,16 @@ private final BookRequestToBookConverter converter2;
 
     @PostMapping
     public String addBook(@RequestBody BookRequest request) {
-        bookService.addBook(converter2.convert(request));
+        bookService.addBook(converter.convert(request));
         return "redirect:/books/booklist";
     }
 
     @PutMapping("/{id}")
     public void editBook(@PathVariable Long id, @RequestBody BookRequest request) {
-        bookService.editBook(converter2.convert(id, request));
+        bookService.editBook(converter.convert(id, request));
     }
 
-    public BookConverter getConverter2() {
+    public BookConverter getConverter() {
         return converter;
     }
 }
