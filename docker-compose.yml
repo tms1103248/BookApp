@@ -7,8 +7,8 @@ services:                           #  описание всех докер ко
     restart: unless-stopped         # не обязательный параметр, говорит что делать если контейнер упал, если упал поднимай до того как сами не переазапустим руками
     env_file: .env                  # файл откуда будем брать переменные
     environment:                    # задаем параметры с какими скл сервер создастся
-      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD  # пароль
-      - MYSQL_DATABASE=$MYSQLDB_DATABASE            # база данных
+      - MYSQL_ROOT_PASSWORD=$root  # пароль
+      - MYSQL_DATABASE=$testbase            # база данных
     ports:                                          # для связи внутреннего и внешнего порта
       - "3307:3306"
     volumes:                                        # для моего текущ контейнера сохраняй данные дб из нашей папки в sql
