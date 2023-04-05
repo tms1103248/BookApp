@@ -25,4 +25,4 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
 
 jwt:
-  secret: secret
+  secret: eternityplusinfinity
