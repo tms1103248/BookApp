@@ -3,6 +3,7 @@ package com.example.bookapp.controller;
 
 import com.example.bookapp.entity.Author;
 import com.example.bookapp.repository.DockerRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("test")
+@SecurityRequirement(name = "JWT")
 public class DockerController {
     private final DockerRepository dockerRepository;
 
