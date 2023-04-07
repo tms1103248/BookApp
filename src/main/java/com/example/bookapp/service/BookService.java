@@ -40,7 +40,7 @@ public class BookService {
 
 
     public List<BookResponse> findByAuthor(String author) {
-        Iterable<Book> iterable = bookRepository.findAllByAuthorContaining(author);
+        Iterable<Book> iterable = bookRepository.findAllByAuthorNameContaining(author);
         return StreamSupport.stream(iterable.spliterator(), false)
                 .map(converter::convert)
                 .collect(Collectors.toList());
