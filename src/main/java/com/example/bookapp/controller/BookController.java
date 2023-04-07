@@ -3,6 +3,7 @@ package com.example.bookapp.controller;
 
 import com.example.bookapp.convert.BookConverter;
 import com.example.bookapp.entity.Author;
+import com.example.bookapp.entity.Book;
 import com.example.bookapp.model.BookRequest;
 import com.example.bookapp.model.BookResponse;
 import com.example.bookapp.repository.BookRepository;
@@ -49,9 +50,9 @@ public class BookController {
     }
 
     @PostMapping("addBook")
-    public String addBook(@RequestBody BookRequest request) {
-        bookService.addBook(converter.convert(request));
-        return  "redirect:/books/booklist";
+    public void addBook(@RequestBody BookRequest request) {
+         bookService.addBook(converter.convert(request));
+
     }
 
     @PutMapping("/{editBook}")

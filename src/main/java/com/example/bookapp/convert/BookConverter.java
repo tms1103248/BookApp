@@ -22,6 +22,7 @@ public class BookConverter {
         response.setPrice(book.getPrice());
         Author author = authorRepository.findByName(book.getAuthor()).orElseThrow();
         response.setAuthor(author);
+        response.setTitle(book.getTitle());
         return response;
     }
 
