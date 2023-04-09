@@ -33,29 +33,53 @@ public class SwaggerConfig {
                         .email("ev.1103248@gmail.ru")));
     }
 
-//    @Bean
-//    public GroupedOpenApi getFirstControllerApi() {
-//        return GroupedOpenApi.builder()
-//                .group("First controller group")
-//                .displayName("User controller group")
-//                .pathsToMatch("/author/**","/book/**")
-//                .build();
-//    }
-//
-//    @Bean
-//    public GroupedOpenApi getSecondController(){
-//        return GroupedOpenApi.builder()
-//                .group("second controller group")
-//                .displayName("Admin controller group")
-//                .pathsToMatch("/book/**")
-//                .build();
-//    }
+    @Bean
+    public GroupedOpenApi getFirstControllerApi() {
+        return GroupedOpenApi.builder()
+                .group("First controller group")
+                .displayName("BookAdmin controller group")
+                .pathsToMatch("/books_admin/**")
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi getSecondController(){
+        return GroupedOpenApi.builder()
+                .group("second controller group")
+                .displayName("Authentication controller group")
+                .pathsToMatch("/auth/**")
+                .build();
+    }
 //    @Bean
 //    public GroupedOpenApi getThirdController(){
 //        return GroupedOpenApi.builder()
 //                .group("fourth controller group")
-//                .displayName("fourth controller group")
-//                .pathsToMatch("/admin/**")
+//                .displayName("Authors controller group")
+//                .pathsToMatch("/authors/**")
 //                .build();
 //    }
+    @Bean
+    public GroupedOpenApi getFifthController(){
+        return GroupedOpenApi.builder()
+                .group("fifth controller group")
+                .displayName("BookUser controller group")
+                .pathsToMatch("/books_user/**")
+                .build();
+    }
+    @Bean
+    public GroupedOpenApi getSixthController(){
+        return GroupedOpenApi.builder()
+                .group("sixth controller group")
+                .displayName("AuthorUser controller group")
+                .pathsToMatch("/authors_user/**")
+                .build();
+    }
+    @Bean
+    public GroupedOpenApi getSeventhController(){
+        return GroupedOpenApi.builder()
+                .group("seventh controller group")
+                .displayName("AuthorAdmin controller group")
+                .pathsToMatch("/authors_admin/**")
+                .build();
+    }
 }

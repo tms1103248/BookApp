@@ -10,6 +10,7 @@ import com.example.bookapp.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +22,7 @@ import java.util.stream.StreamSupport;
 @RequiredArgsConstructor
 public class BookService {
     private final BookRepository bookRepository;
+
     private final BookConverter converter;
 
     public BookResponse getBookById(Long id) {
@@ -40,27 +42,35 @@ public class BookService {
 
 
     public List<BookResponse> findByAuthor(String author) {
-        Iterable<Book> iterable = bookRepository.findAllByAuthorNameContaining(author);
+        Iterable<Book> iterable = bookRepository.findAllByAuthorSurnameContaining(author);
         return StreamSupport.stream(iterable.spliterator(), false)
                 .map(converter::convert)
                 .collect(Collectors.toList());
     }
 
-
+//    public List<Book> findByAuthorId(Long authorId) {
+//        Iterable<Book> iterable = bookRepository.findAllByAuthorId(authorId);
+//       return bookRepository.findAllByAuthorId(authorId);
+//    }
     public void addBook(Book author) {
 
         bookRepository.save(author);
     }
 
 
-    public void editBook(Book author) {
+    public Book editBook(Book author) {
         if (!bookRepository.existsById(author.getId()))
             throw new BookNotFoundException("Book not found: id = " + author.getId());
 
 
-        bookRepository.save(author);
+       return bookRepository.save(author);
 
     }
 
+    public void deleteById (Long id) {
+        bookRepository.deleteById(id);
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
 
 }

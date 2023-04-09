@@ -20,9 +20,10 @@ public class BookConverter {
         Book response = new Book();
 
         response.setPrice(book.getPrice());
-        Author author = authorRepository.findByName(book.getAuthor()).orElseThrow();
+        Author author = authorRepository.findBySurname(book.getAuthor());
         response.setAuthor(author);
         response.setTitle(book.getTitle());
+        response.setPrice(book.getPrice());
         return response;
     }
 
@@ -30,7 +31,7 @@ public class BookConverter {
         Book book = new Book();
         book.setId(id);
 
-        Author author=authorRepository.findByName(bookRequest.getAuthor()).orElseThrow();
+        Author author=authorRepository.findBySurname(bookRequest.getAuthor());
         book.setAuthor(author);
         book.setTitle(bookRequest.getTitle());
         book.setPrice(bookRequest.getPrice());
@@ -39,10 +40,10 @@ public class BookConverter {
 
     public BookResponse convert (Book book) {
         BookResponse response =new BookResponse();
-        response.setId(book.getId());
+
         response.setTitle(book.getTitle());
         response.setPrice(book.getPrice());
-        response.setAuthor(book.getAuthor().getName());
+        response.setAuthor(book.getAuthor().getSurname());
         return response;
 
     }

@@ -19,14 +19,14 @@ public class Author {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
     private String surname;
 
 
-    @OneToMany(mappedBy = "author", orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "author", orphanRemoval = true)
     private Set<Book> book = new HashSet<>();
 
 
